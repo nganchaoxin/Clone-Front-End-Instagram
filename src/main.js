@@ -1,9 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { loadFonts } from './plugins/webfontloader'
-import router from './router'
 
-// import vuetify from './plugins/vuetify'
+// VueRouter
+import router from "./router";
+
+// Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -14,9 +16,6 @@ const vuetify = createVuetify({
   components,
   directives,
 })
-// title
-
-
 
 loadFonts()
 

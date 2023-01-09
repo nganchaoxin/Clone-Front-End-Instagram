@@ -41,8 +41,8 @@
             <v-container>
                 <v-row>
                     <v-col cols="7" class="pl-4">
-                        <v-btn-toggle v-model="activeLike" color="red">
-                            <v-btn flat icon @click="likePost(post.id)" value="colorLike">
+                        <v-btn-toggle>
+                            <v-btn flat icon @click="likePost(post)" v-model="post.hasBeenLiked" color="red">
                                 <v-icon color="black">mdi-heart-outline</v-icon>
                                 <!-- <img src="../assets/images/notification-button.svg" alt=""> -->
                             </v-btn>
@@ -72,6 +72,8 @@
                     <v-card-subtitle>{{ niceDate(post) }}</v-card-subtitle>
 
                 </v-row>
+
+
             </v-container>
         </v-card>
 
@@ -80,11 +82,13 @@
 
 <script>
 import moment from 'moment';
+
 export default {
+    props: {
+        posts: Object,
+    },
     data() {
         return {
-
-            activeLike: '',
             colors: [
                 'indigo',
                 'warning',
@@ -99,58 +103,15 @@ export default {
                 'Fourth',
                 'Fifth',
             ],
-            posts: [
-                {
-                    id: 1,
-                    username: 'Ngan Pham',
-                    likes: 36,
-                    hasBeenLikes: false,
-                    postImage: '',
-                    userImage: '',
-                    filter: '',
-                    caption: "25 million children missed out on one or more essential vaccines in 2021",
-                    date: 1672630213431,
-                    location: 'The Craftsman Cocktail Bar',
-
-                },
-                {
-                    id: 2,
-                    username: 'Eric Nguyen',
-                    likes: 26,
-                    hasBeenLikes: false,
-                    postImage: '',
-                    userImage: '',
-                    filter: '',
-                    caption: "25 million children missed out on one or more essential vaccines in 2021",
-                    date: 1672630213431,
-                    location: 'The Craftsman Cocktail Bar',
-
-                },
-                {
-                    id: 3,
-                    username: 'Alice Le',
-                    likes: 40,
-                    hasBeenLikes: false,
-                    postImage: '',
-                    userImage: '',
-                    filter: '',
-                    caption: "25 million children missed out on one or more essential vaccines in 2021",
-                    date: 1672630213431,
-                    location: 'The Craftsman Cocktail Bar',
-
-                },
-
-            ]
         }
     },
     methods: {
         niceDate(post) {
             return moment(post.date).format('MM/DD/YYYY hh:mm');
         },
-        likePost() {
-            const post = posts;
-            console.log(this.post.id);
-            return this.post.likes++;
+        likePost(post) {
+            post.hasBeenLiked ? post.likes-- : post.likes++;
+            post.hasBeenLiked = !post.hasBeenLiked;
         }
     }
 }

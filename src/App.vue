@@ -1,8 +1,9 @@
 <template>
   <v-app>
     <home-header />
-    <home-body style="background-color:#fafafa;" />
+    <home-body :posts="posts" />
     <bottom-menu />
+    <router-view />
   </v-app>
 
 </template>
@@ -12,9 +13,15 @@ import titleMixin from './mixins/titleMixin'
 import HomeHeader from "./components/HomeHeader.vue";
 import HomeBody from "./components/HomeBody.vue";
 import BottomMenu from "./components/BottomMenu.vue";
+
+
+import posts from "./data/posts";
+
 export default {
   mixins: [titleMixin],
+
   title: 'Instagram',
+
   components: {
     HomeHeader,
     HomeBody,
@@ -23,7 +30,7 @@ export default {
   name: 'App',
 
   data: () => ({
-
+    posts,
   }),
 }
 </script>
