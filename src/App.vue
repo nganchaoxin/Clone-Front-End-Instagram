@@ -1,36 +1,22 @@
 <template>
   <v-app>
-    <home-header />
-    <home-body :posts="posts" />
-    <bottom-menu />
-    <router-view />
+    <router-view></router-view>
   </v-app>
 
 </template>
 
 <script>
-import titleMixin from './mixins/titleMixin'
-import HomeHeader from "./components/HomeHeader.vue";
-import HomeBody from "./components/HomeBody.vue";
-import BottomMenu from "./components/BottomMenu.vue";
-
-
-import posts from "./data/posts";
+// import titleMixin from './mixins/titleMixin'
 
 export default {
-  mixins: [titleMixin],
+  // mixins: [titleMixin],
 
-  title: 'Instagram',
+  // title: 'Instagram',
 
-  components: {
-    HomeHeader,
-    HomeBody,
-    BottomMenu,
-  },
-  name: 'App',
+  // name: 'App',
 
-  data: () => ({
-    posts,
-  }),
+  // data: () => ({
+
+  // }),
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
-    <v-main class="my-5">
+    <v-main class="py-12">
         <v-card v-for="post in posts" :key="post.id">
             <v-row class="px-6 my-auto py-auto" justify="center" align="center" style="height: 60px;">
                 <v-col cols="10" class="pa-0">
                     <v-row>
                         <v-avatar size="50">
-                            <v-image>
+                            <v-img>
                                 {{ post.userImage }}
-                            </v-image>
+                            </v-img>
                         </v-avatar>
                         <v-col class="pa-0">
                             <p class="pa-0 ma-0 text-sm-h6">
