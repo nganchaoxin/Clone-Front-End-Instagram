@@ -1,11 +1,10 @@
 <template>
-    <home-header />
-    <v-app>
-        <home-body :posts="posts" />
-    </v-app>
-    <bottom-menu />
-    <router-view />
-
+  <home-header />
+  <v-app>
+    <home-body :posts="posts" />
+  </v-app>
+  <bottom-menu />
+  <router-view />
 </template>
 
 <script>
@@ -16,15 +15,14 @@ import BottomMenu from "../components/BottomMenu.vue";
 import posts from "../data/posts";
 
 export default {
+  components: {
+    HomeHeader,
+    HomeBody,
+    BottomMenu,
+  },
 
-    components: {
-        HomeHeader,
-        HomeBody,
-        BottomMenu,
-    },
-
-    data: () => ({
-        posts,
-    }),
-}
+  data: () => ({
+    posts,
+  }),
+};
 </script>
