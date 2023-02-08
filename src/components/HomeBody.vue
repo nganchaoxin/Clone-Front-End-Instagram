@@ -1,6 +1,6 @@
 <template>
   <v-main class="py-12">
-    <v-card v-for="post in posts" :key="post.id">
+    <v-card v-for="post in posts" :key="post.id" >
       <v-row
         class="px-6 my-auto py-auto"
         justify="center"

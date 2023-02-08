@@ -11,7 +11,7 @@
             type="file"
             style="display: none"
             ref="fileInput"
-            accept="images/*"
+            accept="image/png, image/jpeg"
             @change="inputFile"
           />
         </v-btn>
@@ -33,18 +33,24 @@ export default {
   methods: {
     onInputFile() {
       this.$refs.fileInput.click();
-      this.$router.push({ path: "/upload" });
     },
     inputFile(event) {
       const files = event.target.files;
-      //let fileName = files[0].name
+      if (!files.length) return;
 
       const fileReader = new FileReader();
+      fileReader.readAsDataURL(files[0]);
       fileReader.addEventListener("load", () => {
         this.imageURL = fileReader.result;
       });
-      fileReader.readAsDataURL(files[0]);
+
       this.image = files[0];
+      
+      console.log(this.image);
+      // this.$router.push({
+      //   name: "Create",
+      //   params: { image: this.image },
+      // });
     },
   },
 };
