@@ -1,6 +1,6 @@
 <template>
   <v-app-bar fixed app elevation="1" height="44">
-    <v-row class="px-3 pt-4">
+    <v-row class="px-3 pt-4" v-if="step === 1">
       <v-col>
         <img src="../assets/images/instagram.svg" />
       </v-col>
@@ -20,37 +20,54 @@
         </v-btn>
       </v-col>
     </v-row>
+
+    <v-row class="px-3 pt-4">
+      <v-btn @click="goToHome" v-if="step === 2 || step === 3">Cancel</v-btn>
+      <v-btn @click="nextStep" v-if="step === 2">Next</v-btn>
+    </v-row>
+    <!-- <h3>New Photo Post</h3> -->
+    <v-row v-if="step === 3">
+      <v-btn @click="emitEvent">Share</v-btn>
+    </v-row>
   </v-app-bar>
 </template>
 
 <script>
 export default {
+  props: {
+    step: Number,
+  },
   data() {
-    return {
-      image: null,
-    };
+    return {};
   },
   methods: {
     onInputFile() {
       this.$refs.fileInput.click();
     },
     inputFile(event) {
-      const files = event.target.files;
-      if (!files.length) return;
+      const img = event.target.files[0];
+      this.$emit("uploadImage", img);
+      const newStep = this.step + 1;
+      this.$emit("update-step", newStep);
+    },
+    goToHome() {
+      // this.image = "";
+      // this.selectedFilter = "";
+      // this.caption = "";
 
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(files[0]);
-      fileReader.addEventListener("load", () => {
-        this.imageURL = fileReader.result;
-      });
+      const newStep = this.step - 1;
+      this.$emit("update-step", newStep);
+    },
+    nextStep() {
+      // this.image = "";
+      // this.selectedFilter = "";
+      // this.caption = "";
 
-      this.image = files[0];
-      
-      console.log(this.image);
-      // this.$router.push({
-      //   name: "Create",
-      //   params: { image: this.image },
-      // });
+      const newStep = this.step + 1;
+      this.$emit("update-step", newStep);
+    },
+    emitEvent() {
+      this.$emit("button-clicked");
     },
   },
 };

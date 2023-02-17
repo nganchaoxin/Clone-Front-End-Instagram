@@ -1,6 +1,6 @@
 <template>
   <v-main class="py-12">
-    <v-card v-for="post in posts" :key="post.id" >
+    <v-card v-if="step === 1" v-for="post in posts" :key="post.id">
       <v-row
         class="px-6 my-auto py-auto"
         justify="center"
@@ -10,9 +10,7 @@
         <v-col cols="10" class="pa-0">
           <v-row>
             <v-avatar size="50">
-              <v-img>
-                {{ post.userImage }}
-              </v-img>
+              <v-img :src="post.userImage" />
             </v-avatar>
             <v-col class="pa-0">
               <p class="pa-0 ma-0 text-sm-h6">
@@ -30,21 +28,9 @@
           </v-btn>
         </v-col>
       </v-row>
-
-      <v-carousel
-        cycle
-        height="400"
-        hide-delimiter-background
-        show-arrows-on-hover
-      >
-        <v-carousel-item v-for="(slide, i) in slides" :key="i">
-          <v-sheet :color="colors[i]" height="100%">
-            <v-row class="fill-height" align="center" justify="center">
-              <div class="text-h2">{{ slide }} Slide</div>
-            </v-row>
-          </v-sheet>
-        </v-carousel-item>
-      </v-carousel>
+      <v-card>
+        <v-img :class="post.filter" :src="post.postImage"></v-img>
+      </v-card>
       <v-container>
         <v-row>
           <v-col cols="7" class="pl-4">
@@ -57,7 +43,6 @@
                 color="red"
               >
                 <v-icon color="black">mdi-heart-outline</v-icon>
-                <!-- <img src="../assets/images/notification-button.svg" alt=""> -->
               </v-btn>
             </v-btn-toggle>
 
@@ -86,18 +71,63 @@
         </v-row>
       </v-container>
     </v-card>
+    <div v-if="step === 2">
+      <div
+        class="selected-image"
+        :class="selectedFilter"
+        :style="{ backgroundImage: 'url(' + image + ')' }"
+      ></div>
+      <div class="filter-container">
+        <home-filter
+          v-for="filter in filters"
+          :filter="filter"
+          :image="image"
+          :key="filters.indexOf(filter)"
+        />
+      </div>
+    </div>
+    <div v-if="step === 3">
+      <div
+        class="selected-image"
+        :class="selectedFilter"
+        :style="{ backgroundImage: 'url(' + image + ')' }"
+      ></div>
+      <div class="caption-container">
+        <textarea
+          class="caption-input"
+          placeholder="Write a caption..."
+          type="text"
+          v-model="caption"
+        >
+        </textarea>
+      </div>
+    </div>
   </v-main>
 </template>
 
 <script>
 import moment from "moment";
+import HomeFilter from "./HomeFilter.vue";
 
 export default {
+  components: {
+    HomeFilter,
+  },
   props: {
+    step: Number,
     posts: Object,
+    filters: Array,
+    image: String,
+    selectedFilter: String,
+  },
+  watch: {
+    caption(newVal) {
+      this.$emit("caption-change", newVal);
+    },
   },
   data() {
     return {
+      caption: "",
       colors: [
         "indigo",
         "warning",
@@ -120,4 +150,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" src="../styles/phone-body.scss"></style>
