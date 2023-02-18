@@ -15,7 +15,7 @@
       @caption-change="handleCaptionChange"
     />
   </v-app>
-  <bottom-menu />
+  <bottom-menu v-if="step === 1" />
   <router-view />
 </template>
 
@@ -23,7 +23,7 @@
 import HomeHeader from "../components/HomeHeader.vue";
 import HomeBody from "../components/HomeBody.vue";
 import BottomMenu from "../components/BottomMenu.vue";
-import HomeUpload from "../components/HomeUpload.vue";
+
 
 import posts from "../data/posts";
 import filters from "../data/filters";
@@ -34,7 +34,7 @@ export default {
     HomeHeader,
     HomeBody,
     BottomMenu,
-    HomeUpload,
+
   },
   created() {
     EventBus.on("filter-selected", (evt) => {

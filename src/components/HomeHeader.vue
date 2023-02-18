@@ -21,13 +21,19 @@
       </v-col>
     </v-row>
 
-    <v-row class="px-3 pt-4">
-      <v-btn @click="goToHome" v-if="step === 2 || step === 3">Cancel</v-btn>
-      <v-btn @click="nextStep" v-if="step === 2">Next</v-btn>
-    </v-row>
-    <!-- <h3>New Photo Post</h3> -->
-    <v-row v-if="step === 3">
-      <v-btn @click="emitEvent">Share</v-btn>
+    <v-row class="px-2" v-if="step != 1">
+      <v-col cols="3">
+        <v-btn icon @click="goToHome" v-if="step === 2 || step === 3">
+          <v-icon large>mdi-close</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col cols="6" align="center" class="my-auto">
+        <h3>New post photo</h3>
+      </v-col>
+      <v-col cols="3" align="end" class="my-auto">
+        <v-btn @click="nextStep" v-if="step === 2">Next</v-btn>
+        <v-btn @click="emitEvent" v-if="step === 3">Share</v-btn>
+      </v-col>
     </v-row>
   </v-app-bar>
 </template>

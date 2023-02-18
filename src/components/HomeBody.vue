@@ -9,7 +9,7 @@
       >
         <v-col cols="10" class="pa-0">
           <v-row>
-            <v-avatar size="50">
+            <v-avatar size="40" class="my-auto mx-2">
               <v-img :src="post.userImage" />
             </v-avatar>
             <v-col class="pa-0">
@@ -33,7 +33,7 @@
       </v-card>
       <v-container>
         <v-row>
-          <v-col cols="7" class="pl-4">
+          <v-col cols="7" class="py-0 px-0">
             <v-btn-toggle>
               <v-btn
                 flat
@@ -53,13 +53,13 @@
               <img src="../assets/images/share-button.svg" alt="" />
             </v-btn>
           </v-col>
-          <v-col align="end" cols="5" class="pr-4">
+          <v-col align="end" cols="5" class=" py-0 px-0">
             <v-btn icon flat>
               <img src="../assets/images/bookmark-button.svg" alt="" />
             </v-btn>
           </v-col>
         </v-row>
-        <v-row class="px-4 py-2">
+        <v-row class="px-4 py-0 my-2">
           <p class="mb-2">{{ post.likes }} Liked by vo_hoang_phi and others</p>
 
           <p>
